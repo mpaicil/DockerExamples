@@ -1,0 +1,14 @@
+slackpkg install gcc cmake automake perl libmpc python autoconf m4 git cyrus-sasl pkg-config libevent libtool binutils glibc kernel-headers make curl 
+
+Necesarios para slapt-src
+gpgme libassuan libgpg-error
+
+Necesarios para jansson
+slackpkg install make guile gc libffi libunistring
+
+instalar jansson con slap-src
+wget -d -c https://software.jaos.org/slackpacks/14.1-x86_64/slapt-get/slapt-get-0.10.2t-x86_64-1.tgz --no-check-certificate && wget -d -c https://software.jaos.org/slackpacks/14.1-x86_64/slapt-src/slapt-src-0.3.2i-x86_64-1.tgz --no-check-certificate
+
+
+git config --system http.sslverify false
+
