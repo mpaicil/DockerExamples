@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  visualizer:
+    image: dockersamples/visualizer:stable
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    depends_on:
+      - mineros
+    networks:
+      - webnet
+    ports:
+      - "8080:8080"
+  mineros:
+    image: mpaicil/cpuminer:lastest
+    environment:
+      POOL: monerohash.com:3333
+      WALLET: 46iCGb3H2ySCL8tRB2nGfyhiAPxUNdcU7RDgQQyhekdA63GHUjGs2k9MowyVG7CNjB9k5BzNVha5yQEb34wjTrbw2nyrQam
+    deploy:
+      update_config:
+        parallelism: 2
+        delay: 10s
+        #order: stop-first
+      replicas: 4
+      resources:
+        limits:
+          cpus: "0.9"
+          memory: 400M
+      restart_policy:
+        condition: on-failure 
+    networks:
+      - webnet
+networks:
+  webnet:
